@@ -1,4 +1,20 @@
-<?php require_once('../template/header.php'); ?>
+<?php
+require_once('../template/header.php');
+require_once ('config.php');
+
+if(isset($_POST["Submit"])) {
+    if(($_POST["Username"] == $Username) && ($_POST["Password"] == $Password)) {
+
+        $_SESSION['Username'] = $Username;
+        $_SESSION['Active'] = true;
+        header("location:index.php");
+        exit;
+    }
+    else {
+        echo "Wrong username or password<br>";
+    }
+}
+?>
 <link rel="stylesheet" type="text/css" href="../css/signin.css">
     <title>Sign in</title>
 </head>
