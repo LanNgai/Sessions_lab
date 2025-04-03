@@ -1,9 +1,9 @@
 <?php
 session_start();
-if(!$_SESSION['Active']){
-    header("location:login.php");
-    exit;
-}
+//if(!$_SESSION['Active']){
+//    header("location:login.php");
+//    exit;
+//}
 ?>
 <!DOCTYPE html>
 <html>
