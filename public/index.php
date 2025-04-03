@@ -1,12 +1,19 @@
 <?php
 require_once '../template/header.php';
-require_once ('config.php');
+require '../DBconnect.php';
 
-if(isset($_POST['Submit']))
+$entered_username = $_POST['Username'];
+$entered_password = $_POST['Password'];
+
+if(isset($_POST['Login']))
 {
-    if( ($_POST['Username'] == $Username) && ($_POST['Password'] == $Password) )
+    $stmt = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
+    $stmt->execute([$entered_username]);
+    $DB_user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if( ($entered_username == $DB_user_data['username']) && ($entered_password == $DB_user_data['password']) )
     {
-        $_SESSION['Username'] = $Username;
+        $_SESSION['Username'] = $DB_user_data['username'];
         $_SESSION['Active'] = true;
         header("location:index.php");
         exit;
